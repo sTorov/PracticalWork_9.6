@@ -8,9 +8,7 @@
     class Program
     {
         static void Main()
-        {
-            Console.OutputEncoding = System.Text.Encoding.UTF7;
-            
+        {           
             List<Exception> exceptions = new List<Exception>();
 
             exceptions.Add(new FileNotFoundException("Файл не найден!"));
