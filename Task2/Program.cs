@@ -25,6 +25,17 @@
             return peoples;
         }
 
+        static void PrintPeople(List<People> peoples, string lable)
+        {
+            Console.WriteLine(lable);
+            Console.WriteLine("_______________________________________");
+            foreach (var people in peoples)
+                Console.WriteLine($"{people.SecondName, -12} {people.FirstName, -12} {people.LastName}");
+
+            Console.WriteLine("_______________________________________");
+            Console.WriteLine();
+        }
+
         static void PrintException(OneOrTwoException ex)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -37,6 +48,9 @@
         {
             Console.OutputEncoding = System.Text.Encoding.UTF7;
 
+            List<People> people = GetPeoples();
+            PrintPeople(people, "Список до сортировки");
+
             NumberReader numberReader = new NumberReader();
             numberReader.NumberReaderEvent += Sort;
 
@@ -48,8 +62,6 @@
             {
                 PrintException(ex);
             }
-
-            List<People> exceptions = GetPeoples();
 
             Console.ReadKey();
         }
