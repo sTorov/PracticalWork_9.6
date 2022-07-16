@@ -2,28 +2,94 @@
 {
     class OneOrTwoException : Exception
     {
-        private int Value { get; }
-        public OneOrTwoException(string message, int value) : base(message) 
+        public string Value { get; }
+        public OneOrTwoException(string message, string value) : base(message) 
         { 
             Value = value;
         }
     }
 
+    
     class Program
     {
+        static List<People> GetPeoples()
+        {
+            List<People> peoples = new List<People>();
+
+            peoples.Add(new People("Иван", "Иванов", "Иванович"));
+            peoples.Add(new People("Пётр", "Сидоров", "Владимирович"));
+            peoples.Add(new People("Дмитрий", "Петров", "Генадиевич"));
+            peoples.Add(new People("Александр", "Митрофанов", "Викторович"));
+            peoples.Add(new People("Фёдор", "Шишкин", "Багданович"));
+
+            return peoples;
+        }
+
+        static void PrintException(OneOrTwoException ex)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"{ex.GetType().Name + ":"} {ex.Message}");
+            Console.WriteLine($"Введённое значение: {ex.Value}");
+            Console.ResetColor();
+        }
+
         static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF7;
 
-            List<string> exceptions = new List<string>();
+            NumberReader numberReader = new NumberReader();
+            numberReader.NumberReaderEvent += Sort;
 
-            exceptions.Add("Иванов Д.Ф.");
-            exceptions.Add("Петров П.А.");
-            exceptions.Add("Сидоров С.С.");
-            exceptions.Add("Шишкин И.Т.");
-            exceptions.Add("Староверов М.Л.");
+            try
+            {
+                numberReader.Read();
+            }
+            catch (OneOrTwoException ex)
+            {
+                PrintException(ex);
+            }
+
+            List<People> exceptions = GetPeoples();
 
             Console.ReadKey();
         }
+
+        static void Sort(int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    Console.WriteLine("Введено значение 1");
+                    break;
+                case 2:
+                    Console.WriteLine("Введено значение 2");
+                    break;
+            }
+        }
+
+        class NumberReader
+        {
+            public delegate void NumberReaderDelegate(int value);
+            public event NumberReaderDelegate NumberReaderEvent;
+
+            public void Read()
+            {
+                Console.WriteLine("Введите число 1 или 2 для сортировки\n1 - сортировка А-Я\n2 - сортировка Я-А");
+                string value = Console.ReadLine();
+                int.TryParse(value, out int result);
+
+                if (result != 1 && result != 2)
+                    throw new OneOrTwoException("Введённое значение должно быть 1 или 2", value);
+
+                NumberEntered(result);
+            }
+
+            protected void NumberEntered (int number)
+            {
+                NumberReaderEvent?.Invoke(number);
+            }
+        }
     }
+
+    
 }
