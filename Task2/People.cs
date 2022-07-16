@@ -11,8 +11,13 @@
             FirstName = firtsName;
             SecondName = secondName;
             LastName = lastName;
-        }        
+        }
+
+        public People()
+        {
+            FirstName = null;
+            SecondName = null;
+            LastName = null;
+        }
     }
-
-
 }
