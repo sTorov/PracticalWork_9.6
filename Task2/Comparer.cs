@@ -1,6 +1,9 @@
 ﻿namespace Task2
 {
-    class PeopleIncreasing : IComparer<People>
+    /// <summary>
+    /// Реализация сортировки от А до Я пофамильно для класса People
+    /// </summary>
+    class IncreasingSort : IComparer<People>
     {
         public int Compare(People x, People y)
         {
@@ -8,7 +11,10 @@
         }
     }
 
-    class PeopleDecreasing : IComparer<People>
+    /// <summary>
+    /// Реализация сортировки от Я до А пофамильно для класса People
+    /// </summary>
+    class DecreasingSort : IComparer<People>
     {
         public int Compare(People x, People y)
         {

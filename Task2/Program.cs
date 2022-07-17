@@ -65,11 +65,11 @@
             switch (number)
             {
                 case 1:
-                    peoples.Sort(new PeopleIncreasing());
+                    peoples.Sort(new IncreasingSort());
                     PrintPeople(peoples, "Сортировка А-Я");
                     break;
                 case 2:
-                    peoples.Sort(new PeopleDecreasing());
+                    peoples.Sort(new DecreasingSort());
                     PrintPeople(peoples, "Сортоировка Я-А");
                     break;
             }

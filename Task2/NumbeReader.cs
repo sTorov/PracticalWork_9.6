@@ -7,7 +7,7 @@
 
         public void Read(List<People> peoples)
         {
-            Console.WriteLine("Введите число 1 или 2 для сортировки\n1 - сортировка А-Я\n2 - сортировка Я-А");
+            Console.WriteLine("Введите число 1 или 2 для сортировки по фамилии\n1 - сортировка А-Я\n2 - сортировка Я-А");
             string value = Console.ReadLine();
             int.TryParse(value, out int result);
 
