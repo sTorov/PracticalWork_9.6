@@ -70,7 +70,7 @@
                     break;
                 case 2:
                     peoples.Sort(new DecreasingSort());
-                    PrintPeople(peoples, "Сортоировка Я-А");
+                    PrintPeople(peoples, "Сортировка Я-А");
                     break;
             }
         }
