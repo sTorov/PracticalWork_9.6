@@ -9,7 +9,7 @@
         public event NumberReaderDelegate NumberReaderEvent;
 
         /// <summary>
-        /// Чтение введённого значения с клавиатуры, его проверка еа корректность.<br/>
+        /// Чтение введённого значения с клавиатуры, его проверка на корректность.<br/>
         /// Вызов метода NumberEntered, вызывающего событие NumberReaderEvent
         /// </summary>
         /// <param name="peoples"></param>
