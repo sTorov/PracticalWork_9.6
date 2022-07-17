@@ -2,6 +2,10 @@
 {
     class Program
     {
+        /// <summary>
+        /// Возвращает список из 5-и объектов People
+        /// </summary>
+        /// <returns></returns>
         static List<People> GetPeoples()
         {
             List<People> peoples = new List<People>();
@@ -17,12 +21,12 @@
         
         static void Main()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF7;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             List<People> peoples = GetPeoples();
 
             NumberReader numberReader = new NumberReader();
-            numberReader.NumberReaderEvent += Sort;
+            numberReader.NumberReaderEvent += SwitchSort;
 
             while (true)
             {
@@ -35,7 +39,11 @@
                 catch (Exception ex)
                 {
                     if(ex is OneOrTwoException e)
+                    {
                         e.PrintOneOrTwoException();
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
                     else
                     {
                         PrintOtherException(ex);
@@ -47,7 +55,12 @@
             Console.ReadKey();
         }
 
-        static void Sort(List<People> peoples, int number)
+        /// <summary>
+        /// Выбор соответствующего способа сортировки переданного списка, взависимости от полученного значения.<br/> 1 - Сортировка А-Я<br/>2 - Сортировка Я-А
+        /// </summary>
+        /// <param name="peoples"></param>
+        /// <param name="number"></param>
+        static void SwitchSort(List<People> peoples, int number)
         {
             switch (number)
             {
@@ -62,6 +75,12 @@
             }
         }
 
+        /// <summary>
+        /// Построчный вывод на консоль списка объектов People
+        /// </summary>
+        /// <param name="peoples"></param>
+        /// <param name="lable"></param>
+        /// <exception cref="Exception"></exception>
         static void PrintPeople(List<People> peoples, string lable)
         {
             if (peoples != null)
@@ -78,6 +97,10 @@
                 throw new Exception("Список пуст!");
         }
 
+        /// <summary>
+        /// Вывод сообщения ошибки на консоль с применение форматирования
+        /// </summary>
+        /// <param name="ex"></param>
         static void PrintOtherException(Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
